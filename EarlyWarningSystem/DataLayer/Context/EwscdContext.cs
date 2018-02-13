@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace DataLayer.Context
 {
-    class EwscdContext : DbContext
+    public class EwscdContext : DbContext
     {
         public EwscdContext()
             :base("EarlyWarningSystem")
@@ -26,5 +26,7 @@ namespace DataLayer.Context
         public DbSet<DiseaseProcedure> DiseaseProcedure { get; set; }
 
         public DbSet<PatientDisease> PatientDisease { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

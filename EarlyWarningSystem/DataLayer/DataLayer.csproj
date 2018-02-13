@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Context\EwscdContext.cs" />
     <Compile Include="Entities\Appointment.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
@@ -68,9 +67,9 @@
     <Compile Include="Migrations\201802121940047_InitialMigration.Designer.cs">
       <DependentUpon>201802121940047_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802130556070_ImproveEntities.cs" />
-    <Compile Include="Migrations\201802130556070_ImproveEntities.Designer.cs">
-      <DependentUpon>201802130556070_ImproveEntities.cs</DependentUpon>
+    <Compile Include="Migrations\201802132034152_AddUser.cs" />
+    <Compile Include="Migrations\201802132034152_AddUser.Designer.cs">
+      <DependentUpon>201802132034152_AddUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,8 +82,8 @@
     <EmbeddedResource Include="Migrations\201802121940047_InitialMigration.resx">
       <DependentUpon>201802121940047_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802130556070_ImproveEntities.resx">
-      <DependentUpon>201802130556070_ImproveEntities.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802132034152_AddUser.resx">
+      <DependentUpon>201802132034152_AddUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,7 @@ namespace DataLayer.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ImproveEntities : DbMigration
+    public partial class AddUser : DbMigration
     {
         public override void Up()
         {
