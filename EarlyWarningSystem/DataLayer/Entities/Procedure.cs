@@ -2,12 +2,11 @@
 
 namespace DataLayer.Entities
 {
-    public class Procedure
+    public class Procedure : BaseEntity
     {
-        [Key]
-        public long Id { get; set; }
-
         [Required]
         public string ProcedureName { get; set; }
+
+        public string DEscription { get; set; }
     }
 }

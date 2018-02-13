@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Entities
 {
-    public class Doctor
+    public class Doctor : BaseEntity
     {
-        [Key]
-        public long Id { get; set; }
-
         [Required]
         public string FIO { get; set; }
 
@@ -15,5 +13,15 @@ namespace DataLayer.Entities
 
         [Required]
         public string Specialization { get; set; }
+
+        #region User
+
+        public virtual User User { get; set; }
+
+        [Required]
+        [ForeignKey("User")]
+        public long UserId { get; set; }
+
+        #endregion
     }
 }

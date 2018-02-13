@@ -3,21 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Entities
 {
-    public class CuratorPatient
+    public class CuratorPatient : BaseEntity
     {
-        [Key]
-        public long Id { get; set; }
-
         public virtual Patient Patient { get; set; }
 
         [Required]
         [ForeignKey("Patient")]
         public long PatientId { get; set; }
 
+        #region Curator
+
         public virtual Curator Curator { get; set; }
 
         [Required]
         [ForeignKey("Curator")]
         public long CuratorId { get; set; }
+
+        #endregion
     }
 }

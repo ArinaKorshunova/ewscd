@@ -2,12 +2,11 @@
 
 namespace DataLayer.Entities
 {
-    public class Disease
+    public class Disease : BaseEntity
     {
-        [Key]
-        public long Id { get; set; }
-
         [Required]
         public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }

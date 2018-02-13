@@ -4,22 +4,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Entities
 {
-    public class Appointment
+    public class Appointment : BaseEntity
     {
-        [Key]
-        public long Id { get; set; }
-       
+        #region Doctor 
+
         public virtual Doctor Doctor { get; set; }
 
         [Required]
         [ForeignKey("Doctor")]
         public long DoctorId { get; set; }
 
+        #endregion
+
+        #region Patient
+
         public virtual Patient Patient { get; set; }
 
         [Required]
         [ForeignKey("Patient")]
         public long PatientId { get; set; }
+
+        #endregion
 
         [Required]
         public DateTime AppointmentDate { get; set; }
