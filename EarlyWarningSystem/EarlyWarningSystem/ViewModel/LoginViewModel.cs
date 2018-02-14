@@ -5,6 +5,7 @@ using EarlyWarningSystem.NavigationHelper;
 using EarlyWarningSystem.View;
 using Prism.Commands;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,6 +68,30 @@ namespace EarlyWarningSystem.ViewModel
         public static readonly DependencyProperty RegistrationCommandProperty =
             DependencyProperty.Register("RegistrationCommand", typeof(DelegateCommand), typeof(LoginViewModel), new PropertyMetadata(null));
 
+
+
+
+        public List<string> RoleList
+        {
+            get { return (List<string>)GetValue(RoleListProperty); }
+            set { SetValue(RoleListProperty, value); }
+        }
+        public static readonly DependencyProperty RoleListProperty =
+            DependencyProperty.Register("RoleList", typeof(List<string>), typeof(LoginViewModel), new PropertyMetadata(null));
+
+
+
+        public string Role
+        {
+            get { return (string)GetValue(RoleProperty); }
+            set { SetValue(RoleProperty, value); }
+        }
+        
+        public static readonly DependencyProperty RoleProperty =
+            DependencyProperty.Register("Role", typeof(string), typeof(LoginViewModel), new PropertyMetadata(null));
+
+
+
         #endregion
 
         #region Конструкторы
@@ -76,6 +101,8 @@ namespace EarlyWarningSystem.ViewModel
             DbContext = new EwscdContext();
             LoginCommand = new DelegateCommand(LogIn);
             RegistrationCommand = new DelegateCommand(Registration);
+
+            RoleList = new List<string> { "Врач", "Крутор" };
         }
 
         #endregion
@@ -91,19 +118,23 @@ namespace EarlyWarningSystem.ViewModel
                 if (user != null && Security.Verify(Password, user.PasswordHash))
                 {
                     //Properties.Settings.Default.UserName = user.Login;
-                    //if (user.UserRoles.Any(x => x.Role.Is(Role.Administrator)))
-                    //{
-                    //    Navigation.NavigateTo(new AdministratorMainPage());
-                    //}
-                    //else if (user.UserRoles.Any(x => x.Role.Is(Role.Сurator)) ||
-                    //    user.UserRoles.Any(x => x.Role.Is(Role.Teacher)))
-                    //{
-                    //    Navigation.NavigateTo(new CuratorView());
-                    //}
-                    //else
-                    //{
-                    //    Navigation.NavigateTo(new DoctorView());
-                    //}
+                    if (Role == "Врач" && DbContext.Employees.Any(x => x.UserId == user.Id && x.Role == Role))
+                    {
+                        Navigation.NavigateTo(new DoctorView());
+                    }
+                    else
+                    {
+                        ErrorMessage = "В системе не существует врача с данной учетной записью";
+                    }
+
+                    if (Role == "Куратор" && DbContext.Employees.Any(x => x.UserId == user.Id && x.Role == Role))
+                    {
+                        Navigation.NavigateTo(new CuratorView());
+                    }
+                    else
+                    {
+                        ErrorMessage = "В системе не существует куратора с данной учетной записью";
+                    }
                 }
                 else
                 {

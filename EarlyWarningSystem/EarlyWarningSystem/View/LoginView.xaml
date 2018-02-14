@@ -17,6 +17,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -24,15 +25,17 @@
             <ColumnDefinition Width="20*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
         <TextBlock TextWrapping="Wrap" Text="{Binding ErrorMessage}" Grid.ColumnSpan="2" Foreground="Red" FontSize="12" Height="auto" Margin="10"></TextBlock>
-        <Label Content="Логин:" VerticalAlignment="Center" Grid.Row="1"></Label>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="10" Padding="5" Height="auto" MinHeight="25" Text="{Binding Login, Mode=TwoWay}"/>
-        <Label Content="Пароль:" Grid.Row="2" VerticalAlignment="Center"></Label>
-        <PasswordBox Grid.Column="1" Margin="10" Padding="5" Grid.Row="2" MinHeight="25">
+        <Label Content="Роль:" VerticalAlignment="Center" Grid.Row="1"></Label>
+        <ComboBox Grid.Column="1" Grid.Row="1" Margin="10" Padding="5" ItemsSource="{Binding RoleList}" SelectedIndex="0" SelectedItem="{Binding Role, Mode=TwoWay}"></ComboBox>
+        <Label Content="Логин:" VerticalAlignment="Center" Grid.Row="2"></Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="10" Padding="5" Height="auto" MinHeight="25" Text="{Binding Login, Mode=TwoWay}"/>
+        <Label Content="Пароль:" Grid.Row="3" VerticalAlignment="Center"></Label>
+        <PasswordBox Grid.Column="1" Margin="10" Padding="5" Grid.Row="3" MinHeight="25">
             <i:Interaction.Behaviors>
                 <common:PasswordBehavior Password="{Binding Password, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
         </PasswordBox>
-        <DockPanel Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+        <DockPanel Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Bottom" >
             <Button Content="Войти" Padding="5" Margin="10" Command="{Binding LoginCommand}"></Button>
             <Button Content="Регистрация" Padding="5" Margin="10" Command="{Binding RegistrationCommand}"></Button>
         </DockPanel>

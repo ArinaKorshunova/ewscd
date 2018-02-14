@@ -1,5 +1,6 @@
 ﻿using DataLayer.Entities;
 using System.Data.Entity;
+using System;
 
 namespace DataLayer.Context
 {
@@ -26,5 +27,11 @@ namespace DataLayer.Context
         public DbSet<PatientDisease> PatientDisease { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public void DetectAndSaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            SaveChanges();
+        }
     }
 }
