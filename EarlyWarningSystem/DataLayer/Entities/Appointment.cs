@@ -8,7 +8,7 @@ namespace DataLayer.Entities
     {
         #region Doctor 
 
-        public virtual Doctor Doctor { get; set; }
+        public virtual Employee Doctor { get; set; }
 
         [Required]
         [ForeignKey("Doctor")]

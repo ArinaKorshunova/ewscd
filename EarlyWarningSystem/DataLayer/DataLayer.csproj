@@ -49,28 +49,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Context\EwscdContext.cs" />
     <Compile Include="Entities\Appointment.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\Curator.cs" />
     <Compile Include="Entities\CuratorPatient.cs" />
     <Compile Include="Entities\Disease.cs" />
     <Compile Include="Entities\DiseaseProcedure.cs" />
-    <Compile Include="Entities\Doctor.cs" />
+    <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Interfaces\IDbEntity.cs" />
     <Compile Include="Entities\Interfaces\IDbEntityWithId.cs" />
     <Compile Include="Entities\Patient.cs" />
     <Compile Include="Entities\PatientDisease.cs" />
     <Compile Include="Entities\Procedure.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\201802121940047_InitialMigration.cs" />
-    <Compile Include="Migrations\201802121940047_InitialMigration.Designer.cs">
-      <DependentUpon>201802121940047_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802130556070_ImproveEntities.cs" />
-    <Compile Include="Migrations\201802130556070_ImproveEntities.Designer.cs">
-      <DependentUpon>201802130556070_ImproveEntities.cs</DependentUpon>
+    <Compile Include="Migrations\201802141719179_InitialMigration.cs" />
+    <Compile Include="Migrations\201802141719179_InitialMigration.Designer.cs">
+      <DependentUpon>201802141719179_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,11 +74,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802121940047_InitialMigration.resx">
-      <DependentUpon>201802121940047_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802130556070_ImproveEntities.resx">
-      <DependentUpon>201802130556070_ImproveEntities.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802141719179_InitialMigration.resx">
+      <DependentUpon>201802141719179_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

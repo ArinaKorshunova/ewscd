@@ -13,7 +13,7 @@ namespace DataLayer.Entities
 
         #region Curator
 
-        public virtual Curator Curator { get; set; }
+        public virtual Employee Curator { get; set; }
 
         [Required]
         [ForeignKey("Curator")]

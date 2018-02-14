@@ -1,17 +1,16 @@
 ﻿using DataLayer.Entities;
 using System.Data.Entity;
+using System;
 
 namespace DataLayer.Context
 {
-    class EwscdContext : DbContext
+    public class EwscdContext : DbContext
     {
         public EwscdContext()
             :base("EarlyWarningSystem")
         { }
 
-        public DbSet<Curator> Curators { get; set; }
-
-        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public DbSet<Disease> Disease { get; set; }
 
@@ -26,5 +25,13 @@ namespace DataLayer.Context
         public DbSet<DiseaseProcedure> DiseaseProcedure { get; set; }
 
         public DbSet<PatientDisease> PatientDisease { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public void DetectAndSaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            SaveChanges();
+        }
     }
 }

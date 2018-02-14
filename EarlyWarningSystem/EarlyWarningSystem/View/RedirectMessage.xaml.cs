@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace EarlyWarningSystem.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RedirectMessage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RedirectMessage : Page
     {
-        public MainWindow()
+        public RedirectMessage()
         {
             InitializeComponent();
         }
