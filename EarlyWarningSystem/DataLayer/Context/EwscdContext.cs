@@ -1,6 +1,6 @@
 ﻿using DataLayer.Entities;
 using System.Data.Entity;
-using System;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DataLayer.Context
 {
@@ -12,21 +12,25 @@ namespace DataLayer.Context
 
         public DbSet<Employee> Employees { get; set; }
 
-        public DbSet<Disease> Disease { get; set; }
-
         public DbSet<Patient> Patients { get; set; }
 
-        public DbSet<Procedure> Procedures { get; set; }
+        public DbSet<Action> Action { get; set; }
 
-        public DbSet<Appointment> Appointments { get; set; }
-        
-        public DbSet<CuratorPatient> CuratorPatients { get; set; }
-
-        public DbSet<DiseaseProcedure> DiseaseProcedure { get; set; }
-
-        public DbSet<PatientDisease> PatientDisease { get; set; }
+        public DbSet<PatientDoctor> PatientDoctor { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToOneConstraintIntroductionConvention>();
+
+            modelBuilder.Entity<Patient>().HasRequired(f => f.Curator).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Employee>().HasRequired(f => f.User).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Action>().HasRequired(f => f.Doctor).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Action>().HasRequired(f => f.Patient).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<PatientDoctor>().HasRequired(f => f.Patient).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<PatientDoctor>().HasRequired(f => f.Doctor).WithMany().WillCascadeOnDelete(false);
+        }
 
         public void DetectAndSaveChanges()
         {

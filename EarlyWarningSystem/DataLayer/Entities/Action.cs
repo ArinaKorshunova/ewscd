@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataLayer.Entities
 {
-    public class Appointment : BaseEntity
+    public class Action : BaseEntity
     {
         #region Doctor 
 
@@ -32,5 +32,19 @@ namespace DataLayer.Entities
         public string DoctorsCommnet { get; set; }
 
         public bool WasHeld { get; set; }
+
+        [Required]
+        public string KindAction { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [NotMapped]
+        public string Title {
+            get
+            {
+                return string.Format("{0} {1} - {2} {3}", Doctor.FIO, AppointmentDate.ToString("dd.MM.yyyy"), Description, WasHeld ? "(Проведено)" : "(Не проведено)");
+            }
+        }
     }
 }
