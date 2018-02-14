@@ -9,9 +9,7 @@ namespace DataLayer.Context
             :base("EarlyWarningSystem")
         { }
 
-        public DbSet<Curator> Curators { get; set; }
-
-        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public DbSet<Disease> Disease { get; set; }
 

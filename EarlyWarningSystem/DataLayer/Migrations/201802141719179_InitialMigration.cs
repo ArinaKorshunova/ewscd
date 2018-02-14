@@ -17,21 +17,51 @@ namespace DataLayer.Migrations
                         AppointmentDate = c.DateTime(nullable: false),
                         DoctorsCommnet = c.String(),
                         WasHeld = c.Boolean(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Doctors", t => t.DoctorId, cascadeDelete: true)
+                .ForeignKey("dbo.Employees", t => t.DoctorId, cascadeDelete: true)
                 .ForeignKey("dbo.Patients", t => t.PatientId, cascadeDelete: true)
                 .Index(t => t.DoctorId)
                 .Index(t => t.PatientId);
             
             CreateTable(
-                "dbo.Doctors",
+                "dbo.Employees",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
                         FIO = c.String(nullable: false),
-                        CityName = c.String(nullable: false),
                         Specialization = c.String(nullable: false),
+                        City = c.String(nullable: false),
+                        Role = c.String(nullable: false),
+                        Dscription = c.String(),
+                        UserId = c.Long(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Login = c.String(nullable: false),
+                        PasswordHash = c.String(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Patients",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        FIO = c.String(nullable: false),
+                        BirthDate = c.DateTime(nullable: false),
+                        CityName = c.String(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -42,22 +72,13 @@ namespace DataLayer.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         PatientId = c.Long(nullable: false),
                         CuratorId = c.Long(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Curators", t => t.CuratorId, cascadeDelete: true)
+                .ForeignKey("dbo.Employees", t => t.CuratorId, cascadeDelete: true)
                 .ForeignKey("dbo.Patients", t => t.PatientId, cascadeDelete: true)
                 .Index(t => t.PatientId)
                 .Index(t => t.CuratorId);
-            
-            CreateTable(
-                "dbo.Curators",
-                c => new
-                    {
-                        Id = c.Long(nullable: false, identity: true),
-                        FIO = c.String(nullable: false),
-                        CityName = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Diseases",
@@ -65,6 +86,8 @@ namespace DataLayer.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         Name = c.String(nullable: false),
+                        Description = c.String(),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -75,6 +98,7 @@ namespace DataLayer.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         DiseaseId = c.Long(nullable: false),
                         ProcedureId = c.Long(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Diseases", t => t.DiseaseId, cascadeDelete: true)
@@ -88,6 +112,8 @@ namespace DataLayer.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         ProcedureName = c.String(nullable: false),
+                        DEscription = c.String(),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -98,6 +124,7 @@ namespace DataLayer.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         PatientId = c.Long(nullable: false),
                         DiseaseId = c.Long(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Diseases", t => t.DiseaseId, cascadeDelete: true)
@@ -114,24 +141,27 @@ namespace DataLayer.Migrations
             DropForeignKey("dbo.DiseaseProcedures", "ProcedureId", "dbo.Procedures");
             DropForeignKey("dbo.DiseaseProcedures", "DiseaseId", "dbo.Diseases");
             DropForeignKey("dbo.CuratorPatients", "PatientId", "dbo.Patients");
-            DropForeignKey("dbo.CuratorPatients", "CuratorId", "dbo.Curators");
+            DropForeignKey("dbo.CuratorPatients", "CuratorId", "dbo.Employees");
             DropForeignKey("dbo.Appointments", "PatientId", "dbo.Patients");
-            DropForeignKey("dbo.Appointments", "DoctorId", "dbo.Doctors");
+            DropForeignKey("dbo.Appointments", "DoctorId", "dbo.Employees");
+            DropForeignKey("dbo.Employees", "UserId", "dbo.Users");
             DropIndex("dbo.PatientDiseases", new[] { "DiseaseId" });
             DropIndex("dbo.PatientDiseases", new[] { "PatientId" });
             DropIndex("dbo.DiseaseProcedures", new[] { "ProcedureId" });
             DropIndex("dbo.DiseaseProcedures", new[] { "DiseaseId" });
             DropIndex("dbo.CuratorPatients", new[] { "CuratorId" });
             DropIndex("dbo.CuratorPatients", new[] { "PatientId" });
+            DropIndex("dbo.Employees", new[] { "UserId" });
             DropIndex("dbo.Appointments", new[] { "PatientId" });
             DropIndex("dbo.Appointments", new[] { "DoctorId" });
             DropTable("dbo.PatientDiseases");
             DropTable("dbo.Procedures");
             DropTable("dbo.DiseaseProcedures");
             DropTable("dbo.Diseases");
-            DropTable("dbo.Curators");
             DropTable("dbo.CuratorPatients");
-            DropTable("dbo.Doctors");
+            DropTable("dbo.Patients");
+            DropTable("dbo.Users");
+            DropTable("dbo.Employees");
             DropTable("dbo.Appointments");
         }
     }
