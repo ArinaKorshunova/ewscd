@@ -30,7 +30,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal">
-            <ListView ItemsSource="{Binding Patients}" BorderBrush="Transparent" SelectedItem="{Binding SelectedPatient}" Margin="0">
+            <ListView ItemsSource="{Binding Patients}" BorderBrush="Transparent" SelectedItem="{Binding SelectedPatient}" Margin="0"
+                      HorizontalContentAlignment="Stretch">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectedPatientCommand}" />
@@ -39,7 +40,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border Margin="10" Padding="5" BorderBrush="Black" BorderThickness="1">
-                            <Grid Width="auto" Height="auto" >
+                            <Grid Width="auto" MaxWidth="300" Height="auto" >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>

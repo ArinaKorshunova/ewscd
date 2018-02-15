@@ -55,5 +55,14 @@ namespace DataLayer.Entities
                 return string.Format("{0} | {1} - {2}", AppointmentDate.ToString("dd.MM.yyyy"), KindAction, Description);
             }
         }
+
+        [NotMapped]
+        public string PatientInfo
+        {
+            get
+            {
+                return $"{Patient.FIO}: {Patient.Disease}";
+            }
+        }
     }
 }

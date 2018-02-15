@@ -59,6 +59,7 @@
                     <Border Margin="10" Padding="5" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch">
                         <StackPanel>
                             <TextBlock Text="{Binding TitleForDoctor}" HorizontalAlignment="Left" FontSize="16" Grid.Row="1"></TextBlock>
+                            <TextBlock Text="{Binding PatientInfo}" HorizontalAlignment="Left" Grid.Row="1"></TextBlock>
                             <TextBlock HorizontalAlignment="Left" Grid.Row="3">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">

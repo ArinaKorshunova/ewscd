@@ -36,7 +36,7 @@
         <Calendar Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Patient.BirthDate, Mode=TwoWay}" DisplayDate="{x:Static sys:DateTime.Now}" DisplayDateStart="1/1/1900" DisplayDateEnd="{x:Static sys:DateTime.Now}"/>
         <Label Grid.Row="3"  Content="Город:" VerticalAlignment="Center" ></Label>
         <TextBox Grid.Row="3"  Grid.Column="1" Margin="10" Padding="5" Height="auto" MinHeight="25" Text="{Binding Patient.CityName, Mode=TwoWay}"></TextBox>
-        <Label Grid.Row="4"  Content="Болезнь:" VerticalAlignment="Center" ></Label>
+        <Label Grid.Row="4"  Content="Категория:" VerticalAlignment="Center" ></Label>
         <TextBox Grid.Row="4"  Grid.Column="1" Margin="10" Padding="5" Height="auto" MinHeight="25" Text="{Binding Patient.Disease, Mode=TwoWay}"></TextBox>
 
         <DockPanel  Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
