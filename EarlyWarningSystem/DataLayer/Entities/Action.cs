@@ -46,5 +46,14 @@ namespace DataLayer.Entities
                 return string.Format("{0} {1} - {2} {3}", Doctor.FIO, AppointmentDate.ToString("dd.MM.yyyy"), Description, WasHeld ? "(Проведено)" : "(Не проведено)");
             }
         }
+
+        [NotMapped]
+        public string TitleForDoctor
+        {
+            get
+            {
+                return string.Format("{0} | {1} - {2}", AppointmentDate.ToString("dd.MM.yyyy"), KindAction, Description);
+            }
+        }
     }
 }

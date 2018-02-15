@@ -4,11 +4,79 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EarlyWarningSystem.View"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:viewmodel="clr-namespace:EarlyWarningSystem.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="DoctorView">
+      d:DesignHeight="300" d:DesignWidth="300">
+    <Page.DataContext>
+        <viewmodel:DoctorViewModel/>
+    </Page.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Действия" FontSize="20" Margin="15, 5"></TextBlock>
         
+        <TextBlock TextWrapping="Wrap" Text="{Binding ErrorMessage}" Grid.Row="1" Foreground="Red" FontSize="12" Height="auto" Margin="10"></TextBlock>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label Margin="5" Content="Комментарий: " VerticalAlignment="Center"></Label>
+            <TextBox Margin="5" Padding="5" Width="200" Text="{Binding SelectedAction.DoctorsCommnet, Mode=TwoWay}">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedAction.WasHeld}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Margin="5" Padding="5" Background="White" Command="{Binding CheckAsHeldCommand}" Content="Отметить как проведенный">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedAction.WasHeld}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+        
+        <ListView Grid.Row="3" ItemsSource="{Binding Actions}" BorderBrush="Transparent" SelectedItem="{Binding SelectedAction}" Margin="0"
+                  HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Padding="5" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch">
+                        <StackPanel>
+                            <TextBlock Text="{Binding TitleForDoctor}" HorizontalAlignment="Left" FontSize="16" Grid.Row="1"></TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Grid.Row="3">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Text" Value="Не проведен"/>
+                                        <Setter Property="Foreground" Value="Red"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding WasHeld}" Value="True">
+                                                <Setter Property="Text" Value="Проведен"/>
+                                                <Setter Property="Foreground" Value="Green"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
