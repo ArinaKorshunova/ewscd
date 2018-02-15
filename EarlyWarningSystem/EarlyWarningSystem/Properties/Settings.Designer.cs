@@ -23,29 +23,39 @@ namespace EarlyWarningSystem.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public long CurrentCuratorId {
             get {
                 return ((long)(this["CurrentCuratorId"]));
             }
-            set
-            {
+            set {
                 this["CurrentCuratorId"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public long CurrentDoctorId {
             get {
                 return ((long)(this["CurrentDoctorId"]));
             }
-            set
-            {
+            set {
                 this["CurrentDoctorId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long CurrentPatientId {
+            get {
+                return ((long)(this["CurrentPatientId"]));
+            }
+            set {
+                this["CurrentPatientId"] = value;
             }
         }
     }

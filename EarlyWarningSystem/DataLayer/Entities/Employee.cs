@@ -26,7 +26,15 @@ namespace DataLayer.Entities
         [Required]
         [ForeignKey("User")]
         public long UserId { get; set; }
-        
+
         #endregion
+
+        [NotMapped]
+        public string NameWithSpecialization {
+            get
+            {
+                return $"{FIO} ({Specialization})";
+            }
+        }
     }
 }

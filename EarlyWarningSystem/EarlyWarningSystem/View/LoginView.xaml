@@ -7,7 +7,7 @@
       xmlns:viewmodel="clr-namespace:EarlyWarningSystem.ViewModel"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:common="clr-namespace:EarlyWarningSystem.Common"
-      mc:Ignorable="d" d:DesignWidth="300" ShowsNavigationUI="False" Title="Журнал куратора">
+      mc:Ignorable="d" d:DesignWidth="300" ShowsNavigationUI="False" Title="Ранняя помощь детям с ограниченными возможностями здоровья">
     <Page.DataContext>
         <viewmodel:LoginViewModel/>
     </Page.DataContext>

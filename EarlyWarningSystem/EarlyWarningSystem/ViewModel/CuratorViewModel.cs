@@ -55,9 +55,7 @@ namespace EarlyWarningSystem.ViewModel
         
         public static readonly DependencyProperty  AddPatientCommandProperty =
             DependencyProperty.Register(" AddPatientCommand", typeof(DelegateCommand), typeof(CuratorViewModel), new PropertyMetadata(null));
-
-
-
+        
 
         public List<DataLayer.Entities.Action> Actions
         {
@@ -89,6 +87,16 @@ namespace EarlyWarningSystem.ViewModel
         public static readonly DependencyProperty AddNewActionCommandProperty =
             DependencyProperty.Register("AddNewActionCommand", typeof(DelegateCommand), typeof(CuratorViewModel), new PropertyMetadata(null));
 
+        
+
+        public Visibility ActionVisibility
+        {
+            get { return (Visibility)GetValue(ActionVisibilityProperty); }
+            set { SetValue(ActionVisibilityProperty, value); }
+        }
+
+        public static readonly DependencyProperty ActionVisibilityProperty =
+            DependencyProperty.Register("ActionVisibility", typeof(Visibility), typeof(CuratorViewModel), new PropertyMetadata(null));
 
 
 
@@ -102,6 +110,7 @@ namespace EarlyWarningSystem.ViewModel
 
             Patients = DbContext.Patients.Where(x => x.CuratorId == Properties.Settings.Default.CurrentCuratorId).ToList();
 
+            ActionVisibility = Visibility.Hidden;
             SelectedPatientCommand = new DelegateCommand(SelectPatient);
             AddPatientCommand = new DelegateCommand(AddPatient);
             AddNewActionCommand = new DelegateCommand(AddNewAction);
@@ -116,6 +125,11 @@ namespace EarlyWarningSystem.ViewModel
             if (SelectedPatient != null)
             {
                 Actions = DbContext.Action.Where(x => x.PatientId == SelectedPatient.Id).OrderByDescending(x => x.AppointmentDate).ToList();
+                ActionVisibility = Visibility.Visible;
+            }
+            else
+            {
+                ActionVisibility = Visibility.Hidden;
             }
         }
         
@@ -126,7 +140,11 @@ namespace EarlyWarningSystem.ViewModel
 
         private void AddNewAction()
         {
-            Navigation.NavigateTo(new AddNewActionView());
+            if (SelectedPatient != null)
+            {
+                Properties.Settings.Default.CurrentPatientId = SelectedPatient.Id;
+                Navigation.NavigateTo(new AddNewActionView());
+            }
         }
 
         #endregion

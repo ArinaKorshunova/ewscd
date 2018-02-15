@@ -24,12 +24,12 @@
 
         <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Text="Подопечные" FontSize="20" Margin="15, 5"></TextBlock>
-            <Button Padding="0" Margin="5" Background="White" Command="{Binding AddPatientCommand}">
+            <Button Padding="5" Margin="5" Background="White" Command="{Binding AddPatientCommand}" BorderBrush="Transparent">
                 <Image Source="..\Images\plus.png" Height="20" Margin="0"></Image>
             </Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal">
             <ListView ItemsSource="{Binding Patients}" BorderBrush="Transparent" SelectedItem="{Binding SelectedPatient}" Margin="0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -50,21 +50,26 @@
                                 <TextBlock Text="{Binding BirthDate, StringFormat='{}{0:dd.MM.yyyy}'}" HorizontalAlignment="Center" Grid.Row="1"></TextBlock>
                                 <TextBlock Text="{Binding Disease}" HorizontalAlignment="Center" Grid.Row="2"></TextBlock>
                                 <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
-                                    <Label Content="Куратор: " VerticalAlignment="Center"/>
-                                    <TextBlock  VerticalAlignment="Center" Text="{Binding Сurator.Name}"></TextBlock>
+                                    <Label Content="Город: " VerticalAlignment="Center"/>
+                                    <TextBlock  VerticalAlignment="Center" Text="{Binding CityName}"></TextBlock>
                                 </WrapPanel>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Border Margin="0, 5" 
+                VerticalAlignment="Stretch"
+                Width="2"
+                BorderBrush="Black" 
+                BorderThickness="2" />
         </StackPanel>
 
 
-        <StackPanel  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch">
+        <StackPanel  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Visibility="{Binding ActionVisibility}">
             <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal">
                 <TextBlock Text="Действия" FontSize="20" Margin="15, 5"></TextBlock>
-                <Button Padding="0" Margin="5" Background="White" Command="{Binding AddNewActionCommand}">
+                <Button Padding="5" Margin="5" Background="White" Command="{Binding AddNewActionCommand}"  BorderBrush="Transparent">
                     <Image Source="..\Images\plus.png" Height="20" Margin="0"></Image>
                 </Button>
             </StackPanel>
