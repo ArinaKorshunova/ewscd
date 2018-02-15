@@ -1,6 +1,7 @@
 ﻿using DataLayer.Context;
 using DataLayer.Entities;
 using EarlyWarningSystem.Common;
+using EarlyWarningSystem.Model;
 using EarlyWarningSystem.NavigationHelper;
 using EarlyWarningSystem.View;
 using Prism.Commands;
@@ -96,7 +97,7 @@ namespace EarlyWarningSystem.ViewModel
         public RegistrationViewModel()
         {
             DbContext = new EwscdContext();
-            RoleList = new List<string> { "Врач", "Крутор" };
+            RoleList = new List<string> { Const.DoctorRole, Const.CuratorRole };
             Employee = new Employee();
             OkCommand = new DelegateCommand(Register);
             CancelCommand = new DelegateCommand(Cancel);

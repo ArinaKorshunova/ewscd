@@ -1,6 +1,7 @@
 ﻿using DataLayer.Context;
 using DataLayer.Entities;
 using EarlyWarningSystem.Common;
+using EarlyWarningSystem.Model;
 using EarlyWarningSystem.NavigationHelper;
 using EarlyWarningSystem.View;
 using Prism.Commands;
@@ -102,7 +103,7 @@ namespace EarlyWarningSystem.ViewModel
             LoginCommand = new DelegateCommand(LogIn);
             RegistrationCommand = new DelegateCommand(Registration);
 
-            RoleList = new List<string> { "Врач", "Крутор" };
+            RoleList = new List<string> { Const.DoctorRole, Const.CuratorRole };
         }
 
         #endregion
@@ -117,23 +118,20 @@ namespace EarlyWarningSystem.ViewModel
 
                 if (user != null && Security.Verify(Password, user.PasswordHash))
                 {
-                    //Properties.Settings.Default.UserName = user.Login;
-                    if (Role == "Врач" && DbContext.Employees.Any(x => x.UserId == user.Id && x.Role == Role))
+                    var employee = DbContext.Employees.FirstOrDefault(x => x.UserId == user.Id && x.Role == Role);
+                    if (Role == Const.DoctorRole && employee != null)
                     {
+                        Properties.Settings.Default.CurrentDoctorId = employee.Id;
                         Navigation.NavigateTo(new DoctorView());
                     }
-                    else
+                    else if (Role == Const.CuratorRole && employee != null)
                     {
-                        ErrorMessage = "В системе не существует врача с данной учетной записью";
-                    }
-
-                    if (Role == "Куратор" && DbContext.Employees.Any(x => x.UserId == user.Id && x.Role == Role))
-                    {
+                        Properties.Settings.Default.CurrentCuratorId = employee.Id;
                         Navigation.NavigateTo(new CuratorView());
                     }
                     else
                     {
-                        ErrorMessage = "В системе не существует куратора с данной учетной записью";
+                        ErrorMessage = "В системе не существует сотрудника с данной учетной записью";
                     }
                 }
                 else

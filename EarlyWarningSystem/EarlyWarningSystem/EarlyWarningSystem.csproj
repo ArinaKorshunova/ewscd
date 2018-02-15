@@ -84,14 +84,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\BindableSelectedItemBehavior.cs" />
+    <Compile Include="Model\Const.cs" />
+    <Compile Include="ViewModel\AddNewActionViewModel.cs" />
+    <Compile Include="ViewModel\AddPatientViewModel.cs" />
+    <Compile Include="ViewModel\CuratorViewModel.cs" />
     <Compile Include="ViewModel\RedirectMessageViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
+    <Compile Include="View\AddNewActionView.xaml.cs">
+      <DependentUpon>AddNewActionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddPatientView.xaml.cs">
+      <DependentUpon>AddPatientView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RedirectMessage.xaml.cs">
       <DependentUpon>RedirectMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddNewActionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddPatientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CuratorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,14 +177,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
       <Project>{4fc26456-0be1-461d-96ca-9825475dd07a}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

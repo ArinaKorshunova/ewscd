@@ -4,11 +4,92 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EarlyWarningSystem.View"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:viewmodel="clr-namespace:EarlyWarningSystem.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="CuratorView">
+      d:DesignHeight="300" d:DesignWidth="300">
+    <Page.DataContext>
+        <viewmodel:CuratorViewModel/>
+    </Page.DataContext>
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal">
+            <TextBlock Text="Подопечные" FontSize="20" Margin="15, 5"></TextBlock>
+            <Button Padding="5" Margin="5" Background="White" Command="{Binding AddPatientCommand}" BorderBrush="Transparent">
+                <Image Source="..\Images\plus.png" Height="20" Margin="0"></Image>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal">
+            <ListView ItemsSource="{Binding Patients}" BorderBrush="Transparent" SelectedItem="{Binding SelectedPatient}" Margin="0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedPatientCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10" Padding="5" BorderBrush="Black" BorderThickness="1">
+                            <Grid Width="auto" Height="auto" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding FIO}" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                                <TextBlock Text="{Binding BirthDate, StringFormat='{}{0:dd.MM.yyyy}'}" HorizontalAlignment="Center" Grid.Row="1"></TextBlock>
+                                <TextBlock Text="{Binding Disease}" HorizontalAlignment="Center" Grid.Row="2"></TextBlock>
+                                <WrapPanel Grid.Row="3" HorizontalAlignment="Center">
+                                    <Label Content="Город: " VerticalAlignment="Center"/>
+                                    <TextBlock  VerticalAlignment="Center" Text="{Binding CityName}"></TextBlock>
+                                </WrapPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Border Margin="0, 5" 
+                VerticalAlignment="Stretch"
+                Width="2"
+                BorderBrush="Black" 
+                BorderThickness="2" />
+        </StackPanel>
+
+
+        <StackPanel  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Visibility="{Binding ActionVisibility}">
+            <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal">
+                <TextBlock Text="Действия" FontSize="20" Margin="15, 5"></TextBlock>
+                <Button Padding="5" Margin="5" Background="White" Command="{Binding AddNewActionCommand}"  BorderBrush="Transparent">
+                    <Image Source="..\Images\plus.png" Height="20" Margin="0"></Image>
+                </Button>
+            </StackPanel>
+
+            <ListBox ItemsSource="{Binding Actions}" BorderBrush="Transparent" Margin="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="10, 5">
+                            <TextBlock Text="{Binding Title}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+
+        <!--<GridSplitter HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch" 
+                  Grid.Column="1" Grid.Row="2" ResizeBehavior="PreviousAndNext"
+                  Width="2" Background="#423535" Height="Auto" />-->
+
     </Grid>
 </Page>

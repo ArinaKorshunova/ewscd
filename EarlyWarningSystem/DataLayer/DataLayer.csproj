@@ -50,21 +50,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\EwscdContext.cs" />
-    <Compile Include="Entities\Appointment.cs" />
+    <Compile Include="Entities\Action.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\CuratorPatient.cs" />
-    <Compile Include="Entities\Disease.cs" />
-    <Compile Include="Entities\DiseaseProcedure.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Interfaces\IDbEntity.cs" />
     <Compile Include="Entities\Interfaces\IDbEntityWithId.cs" />
     <Compile Include="Entities\Patient.cs" />
-    <Compile Include="Entities\PatientDisease.cs" />
-    <Compile Include="Entities\Procedure.cs" />
+    <Compile Include="Entities\PatientDoctor.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Migrations\201802141719179_InitialMigration.cs" />
     <Compile Include="Migrations\201802141719179_InitialMigration.Designer.cs">
       <DependentUpon>201802141719179_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802141847552_SomeChanging.cs" />
+    <Compile Include="Migrations\201802141847552_SomeChanging.Designer.cs">
+      <DependentUpon>201802141847552_SomeChanging.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802141949225_RemoveDiesease.cs" />
+    <Compile Include="Migrations\201802141949225_RemoveDiesease.Designer.cs">
+      <DependentUpon>201802141949225_RemoveDiesease.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +80,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802141719179_InitialMigration.resx">
       <DependentUpon>201802141719179_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802141847552_SomeChanging.resx">
+      <DependentUpon>201802141847552_SomeChanging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802141949225_RemoveDiesease.resx">
+      <DependentUpon>201802141949225_RemoveDiesease.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

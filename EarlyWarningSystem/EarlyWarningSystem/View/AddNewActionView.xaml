@@ -1,0 +1,47 @@
+﻿<Page x:Class="EarlyWarningSystem.View.AddNewActionView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:local="clr-namespace:EarlyWarningSystem.View"
+      xmlns:common="clr-namespace:EarlyWarningSystem.Common"
+      xmlns:viewmodel="clr-namespace:EarlyWarningSystem.ViewModel"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="400"
+       ShowsNavigationUI="False" Title="Ранняя помощь детям с ограниченными возможностями здоровья">
+    <Page.DataContext>
+        <viewmodel:AddNewActionViewModel/>
+    </Page.DataContext>
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="10*" MinWidth="200"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock TextWrapping="Wrap" Text="{Binding ErrorMessage}" Grid.ColumnSpan="2" Foreground="Red" FontSize="12" Height="auto" Margin="10"></TextBlock>
+
+        <Label Content="Врач:" VerticalAlignment="Center" Grid.Row="1"></Label>
+        <ComboBox Grid.Column="1" Grid.Row="1" Margin="10" Padding="5" ItemsSource="{Binding Doctors}" DisplayMemberPath="NameWithSpecialization" SelectedItem="{Binding SelectedDoctor, Mode=TwoWay}"></ComboBox>
+        <Label Grid.Row="2" Content="Дата проведения:" VerticalAlignment="Top" ></Label>
+        <Calendar Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Action.AppointmentDate, Mode=TwoWay}" DisplayDate="{x:Static sys:DateTime.Now}" DisplayDateStart="1/1/2018" DisplayDateEnd="1/1/2050"/>
+        <Label Grid.Row="3"  Content="Вид:" VerticalAlignment="Center" ></Label>
+        <ComboBox Grid.Row="3"  Grid.Column="1" Margin="10" Padding="5" ItemsSource="{Binding KindList}" SelectedIndex="0" SelectedItem="{Binding Action.KindAction, Mode=TwoWay}"></ComboBox>
+        <Label Grid.Row="4"  Content="Описание:" VerticalAlignment="Center" ></Label>
+        <TextBox Grid.Row="4"  Grid.Column="1" Margin="10" Padding="5" Height="auto" MinHeight="25" Text="{Binding Action.Description, Mode=TwoWay}"></TextBox>
+
+        <DockPanel  Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+            <Button Content="Ок" Padding="5" Margin="10" Command="{Binding OkCommand}"></Button>
+            <Button Content="Отмена" Padding="5" Margin="10" Command="{Binding CancelCommand}"></Button>
+        </DockPanel>
+    </Grid>
+</Page>
